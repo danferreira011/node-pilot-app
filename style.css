@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: green; /* azul */
+  background-color: blue; /* azul */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  background-color: white;
+  background-color: rgb(61, 58, 58);
   padding: 40px;
   border-radius: 10px;
   text-align: center;
@@ -18,12 +18,12 @@ body {
 }
 
 h1 {
-  color: #333;
+  color: #ffffff;
 }
 
 p {
   font-size: 18px;
-  color: #555;
+  color: #ffffff;
 }
 .server {
   background-color: #007BFF;

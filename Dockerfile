@@ -1,9 +1,11 @@
-FROM node:18-alpine
+FROM node:alpine3.23
+
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install 
+# npm ci --only=production
 
 COPY . .
 
