@@ -17,3 +17,12 @@ jobs:
       with:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build da imagem Docker (and Push)
+      uses: docker/build-push-action@v7
+      with:
+        context: .
+        file: Dockerfile
+        push: true
+        tags: |
+          danferreira011/app-pilot-node:v${{github.run_number}}
+          danferreira011/app-pilot-node:latest
