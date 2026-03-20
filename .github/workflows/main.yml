@@ -41,6 +41,6 @@ jobs:
         uses: Azure/k8s-deploy@v5
         with:
           manifests: |
-              ./k8s/deploy.yaml
+            ./k8s/deploy.yaml
           images: |
             danferreira011/app-pilot-node:v${{github.run_number}}
