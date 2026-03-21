@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Obtendo o Código
       uses: actions/checkout@v6.0.2
-#autmticar no dokcerhub
+#autenticar no dokcerhub
 #executar docker build
 #executar docker push
     - name: Autenticação Docker Hub
