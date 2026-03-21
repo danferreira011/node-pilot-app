@@ -12,6 +12,9 @@ jobs:
 #autenticar no dokcerhub
 #executar docker build
 #executar docker push
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      
     - name: Set up Docker Buildx #para corrigir problemas de plataforma
       uses: docker/setup-buildx-action@v3
 
