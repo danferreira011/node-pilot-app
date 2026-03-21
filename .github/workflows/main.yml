@@ -12,6 +12,9 @@ jobs:
 #autenticar no dokcerhub
 #executar docker build
 #executar docker push
+    - name: Set up Docker Buildx #para corrigir problemas de plataforma
+      uses: docker/setup-buildx-action@v3
+
     - name: Autenticação Docker Hub
       uses: docker/login-action@v4
       with:
@@ -43,4 +46,4 @@ jobs:
           manifests: |
             ./k8s/deploy.yaml
           images: |
-            danferreira011/app-pilot-node:v2
+            danferreira011/app-pilot-node:latest

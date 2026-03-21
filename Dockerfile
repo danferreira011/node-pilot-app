@@ -1,5 +1,4 @@
-FROM node
-    # alpine3.23
+FROM node:alpine3.23
 
 
 WORKDIR /app
