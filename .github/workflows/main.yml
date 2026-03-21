@@ -12,7 +12,7 @@ jobs:
 #autenticar no dokcerhub
 #executar docker build
 #executar docker push
-    - name: Set up QEMU
+    - name: Set up QEMU #para corrigir problemas de plataforma
       uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx #para corrigir problemas de plataforma
@@ -30,8 +30,8 @@ jobs:
         context: .
         file: Dockerfile
         push: true
-        platforms: linux/amd64,linux/arm64
-        provenance: false
+        platforms: linux/amd64,linux/arm64 #para garantir que a imagem seja compatível com diferentes arquiteturas
+        provenance: false #desabilitar a geração de metadados de proveniência, que pode causar problemas em alguns casos
         tags: |
           danferreira011/app-pilot-node:v${{github.run_number}}
           danferreira011/app-pilot-node:latest
