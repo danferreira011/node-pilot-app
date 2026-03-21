@@ -46,4 +46,4 @@ jobs:
           manifests: |
             ./k8s/deploy.yaml
           images: |
-            danferreira011/app-pilot-node:latest
+            danferreira011/app-pilot-node:v${{github.run_number}}
