@@ -56,7 +56,13 @@ jobs:
         export AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
         export AWS_DEFAULT_REGION=us-east-1
 
-    - name: Execução do Manisfesto
-      run: |
-        kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
-           
+    # - name: Execução do Manisfesto
+    #   run: |
+    #     kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
+    - name: Apply Kubernetes manifests
+      uses: kodermax/kubectl-aws-eks@v1
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.K8S_CONFIG }}
+      with:
+        args: apply -f ./k8s/deploy.yaml
+            
