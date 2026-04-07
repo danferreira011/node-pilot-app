@@ -58,5 +58,5 @@ jobs:
 
     - name: Execução do Manisfesto
       run: |
-        kubectl apply -f ./k8s/deploy.yaml --validate=false
+        kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
            
