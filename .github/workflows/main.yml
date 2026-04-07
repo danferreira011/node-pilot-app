@@ -36,20 +36,27 @@ jobs:
           danferreira011/app-pilot-node:v${{github.run_number}}
           danferreira011/app-pilot-node:latest
   CD:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [CI]
     steps:
-      - name: Obtendo o Código
-        uses: actions/checkout@v6.0.2
-      - name: Configuração de contexto k8s
-        uses: azure/k8s-set-context@v4
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.K8S_CONFIG }}
-      - name: Executar Manifesto
-        uses: Azure/k8s-deploy@v5
-        with:
-          manifests: |
+    - name: Obtendo o Código
+      uses: actions/checkout@v6.0.2
+      
+    - name: Login Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    - name: Configuração de contexto do K8S
+      run: |
+        az account set --subscription AZURE_SUBSCRIPTION_ID
+        az aks get-credentials --resource-group rg-app-node --name aks-cluster --overwrite-existing
+    - name: Execução do Manisfesto
+      uses: Azure/k8s-deploy@v5
+      with:        
+        manifests: |
             ./k8s/deploy.yaml
-          images: |
-            danferreira011/app-pilot-node:v${{github.run_number}}
+        images: |
+          danferreira011/app-pilot-node:v${{github.run_number}}
+          danferreira011/app-pilot-node:latest
