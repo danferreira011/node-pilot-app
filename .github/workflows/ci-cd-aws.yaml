@@ -59,10 +59,11 @@ jobs:
     # - name: Execução do Manisfesto
     #   run: |
     #     kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
-    - name: Apply Kubernetes manifests
-      uses: kodermax/kubectl-aws-eks@v1
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.K8S_CONFIG }}
-      with:
-        args: apply -f ./k8s/deploy.yaml
-            
+    - name: Execução do Manisfesto
+      uses: Azure/k8s-deploy@v5
+      with:        
+        manifests: |
+            ./k8s/deploy.yaml
+        images: |
+          danferreira011/app-pilot-node:v${{github.run_number}}
+          danferreira011/app-pilot-node:latest
