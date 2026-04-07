@@ -1,4 +1,4 @@
-name: CI-CD
+name: CI-CD AWS
 on:
   push:
     branches: ["main"]
@@ -42,16 +42,23 @@ jobs:
     - name: Obtendo o Código
       uses: actions/checkout@v6.0.2
       
-    - name: Login Azure
-      uses: azure/login@v1
+    - name: Login to AWS with access keys
+      uses: KoalaOps/login-aws@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: us-east-1
+        enable_ecr_login: true
+
     - name: Configuração de contexto do K8S
       run: |
-        az account set --subscription AZURE_SUBSCRIPTION_ID
-        az aks get-credentials --resource-group rg-app-node --name aks-cluster --overwrite-existing
+        export AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
+        export AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
+        export AWS_DEFAULT_REGION=us-east-1
+
+    # - name: Execução do Manisfesto
+    #   run: |
+    #     kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
     - name: Execução do Manisfesto
       uses: Azure/k8s-deploy@v5
       with:        
