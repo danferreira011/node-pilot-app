@@ -58,5 +58,5 @@ jobs:
 
     - name: Execução do Manisfesto
       run: |
-        kubectl apply -f k8s/deploy.yaml
+        kubectl apply -f ./k8s/deploy.yaml
            

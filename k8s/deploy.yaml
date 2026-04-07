@@ -30,3 +30,4 @@ spec:
       targetPort: 3000
       protocol: TCP
       name: http
+>>>>>>> 46e06e10882f9a86d9c5313cb94ec623576405dc
