@@ -55,12 +55,8 @@ jobs:
         export AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
         export AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
         export AWS_DEFAULT_REGION=us-east-1
-        
+
     - name: Execução do Manisfesto
-      uses: Azure/k8s-deploy@v5
-      with:        
-        manifests: |
-            ./k8s/deploy.yaml
-        images: |
-          danferreira011/app-pilot-node:v${{github.run_number}}
-          danferreira011/app-pilot-node:latest
+      run: |
+        kubectl apply -f k8s/deploy.yaml
+           
