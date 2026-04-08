@@ -55,15 +55,8 @@ jobs:
         export AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
         export AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
         export AWS_DEFAULT_REGION=us-east-1
+        aws eks update-kubeconfig --name web-quickstart
 
-    # - name: Execução do Manisfesto
-    #   run: |
-    #     kubectl apply -f danferreira011/node-pilot-app/k8s/deploy.yaml
     - name: Execução do Manisfesto
-      uses: Azure/k8s-deploy@v5
-      with:        
-        manifests: |
-            ./k8s/deploy.yaml
-        images: |
-          danferreira011/app-pilot-node:v${{github.run_number}}
-          danferreira011/app-pilot-node:latest
+      run: |
+        kubectl apply -f ./node-pilot-app/k8s/deploy.yaml
