@@ -60,4 +60,4 @@ jobs:
     - name: Execução do Manisfesto
       run: |
         aws eks update-kubeconfig --name web-quickstart
-        kubectl apply -f ./node-pilot-app/k8s/deploy.yaml
+        kubectl apply -f ./k8s/deploy.yaml
