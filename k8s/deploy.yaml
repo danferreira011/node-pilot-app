@@ -11,11 +11,19 @@ spec:
       labels:
         app: app-web
     spec:
+<<<<<<< HEAD
       # tolerations: #Cluster AWS - Tolerations para permitir que os pods sejam agendados em nós com a taint "dedicated=apps:NoSchedule"
       # - key: "dedicated"
       #   operator: "Equal"
       #   value: "apps"
       #   effect: "NoSchedule"
+=======
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "apps"
+        effect: "NoSchedule"
+>>>>>>> 13608c8f62ef74bc4c8d4c4b99c5274633cec735
       containers:
         - name: app-web
           image: danferreira011/app-pilot-node
@@ -37,3 +45,4 @@ spec:
       targetPort: 3000
       protocol: TCP
       name: http
+>>>>>>> 46e06e10882f9a86d9c5313cb94ec623576405dc
