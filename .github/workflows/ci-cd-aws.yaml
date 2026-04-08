@@ -55,8 +55,9 @@ jobs:
         export AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
         export AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
         export AWS_DEFAULT_REGION=us-east-1
-        aws eks update-kubeconfig --name web-quickstart
+        
 
     - name: Execução do Manisfesto
       run: |
+        aws eks update-kubeconfig --name web-quickstart
         kubectl apply -f ./node-pilot-app/k8s/deploy.yaml
