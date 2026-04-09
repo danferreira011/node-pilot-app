@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: app-web
-          image: danferreira011/app-pilot-node:v2
+          image: danferreira011/app-pilot-node
           ports:
             - containerPort: 3000
 ---
