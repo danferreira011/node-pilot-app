@@ -1,7 +1,7 @@
 name: CI-CD AWS
 on:
-  push:
-    branches: ["main"]
+  # push:
+  #   branches: ["main"]
   workflow_dispatch:
 jobs:
   CI:
