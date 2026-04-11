@@ -52,6 +52,7 @@ jobs:
 
     # - name: Execução do Manisfesto
     #   run: kubectl apply -f ./k8s/deploy.yaml
+    
     - name: Apply Kubernetes Manifests
       uses: jonknutson/kubectl-eks-apply@v2.1.2
       env:
