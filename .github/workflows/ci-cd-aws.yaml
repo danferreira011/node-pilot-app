@@ -1,37 +1,37 @@
-# name: CI-CD AWS
-# on:
+name: CI-CD AWS
+on:
 
-#   workflow_dispatch:
-# jobs:
-#   CI:
-#     runs-on: ubuntu-24.04
-#     steps:
-#     - name: Obtendo o Código
-#       uses: actions/checkout@v6.0.2
+  workflow_dispatch:
+jobs:
+  CI:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Obtendo o Código
+      uses: actions/checkout@v6.0.2
 
-#     # - name: Set up QEMU #para corrigir problemas de plataforma
-#     #   uses: docker/setup-qemu-action@v3
+    # - name: Set up QEMU #para corrigir problemas de plataforma
+    #   uses: docker/setup-qemu-action@v3
 
-#     - name: Set up Docker Buildx #para corrigir problemas de plataforma
-#       uses: docker/setup-buildx-action@v3
+    - name: Set up Docker Buildx #para corrigir problemas de plataforma
+      uses: docker/setup-buildx-action@v3
 
-#     - name: Autenticação Docker Hub
-#       uses: docker/login-action@v4
-#       with:
-#         username: ${{ vars.DOCKERHUB_USERNAME }}
-#         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Autenticação Docker Hub
+      uses: docker/login-action@v4
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-#     - name: Build da imagem Docker (and Push)
-#       uses: docker/build-push-action@v7
-#       with:
-#         context: .
-#         file: Dockerfile
-#         push: true
-#         platforms: linux/amd64,linux/arm64 #para garantir que a imagem seja compatível com diferentes arquiteturas
-#         provenance: false #desabilitar a geração de metadados de proveniência, que pode causar problemas em alguns casos
-#         tags: |
-#           danferreira011/app-pilot-node:v${{github.run_number}}
-#           danferreira011/app-pilot-node:latest
+    - name: Build da imagem Docker (and Push)
+      uses: docker/build-push-action@v7
+      with:
+        context: .
+        file: Dockerfile
+        push: true
+        platforms: linux/amd64,linux/arm64 #para garantir que a imagem seja compatível com diferentes arquiteturas
+        provenance: false #desabilitar a geração de metadados de proveniência, que pode causar problemas em alguns casos
+        tags: |
+          danferreira011/app-pilot-node:v${{github.run_number}}
+          danferreira011/app-pilot-node:latest
   CD:
     runs-on: ubuntu-24.04
     needs: [CI]
@@ -46,7 +46,7 @@
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: us-east-1
         enable_ecr_login: true   
-
+         
     - name: Setando Kubeconfig
       run:  aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }}    
 
